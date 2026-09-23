@@ -10,6 +10,13 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
+    <div class="page-loader" aria-hidden="true">
+      <div class="loader-brand">HILONOVA</div>
+      <div class="loader-line"><i></i></div>
+      <span data-loader-count>00</span>
+    </div>
+    <div class="cursor-dot" aria-hidden="true"></div>
+    <div class="cursor-ring" aria-hidden="true"><span>VER</span></div>
     <div class="scroll-progress" aria-hidden="true"></div>
     <header class="site-header" data-header>
       <a class="brand" href="#inicio" aria-label="HILONOVA, inicio">
@@ -34,7 +41,7 @@
         <div class="hero-grid">
           <div class="hero-copy reveal">
             <p class="eyebrow"><span></span> Formación textil de alto desempeño</p>
-            <h1>El oficio se<br />convierte en<br /><em>industria.</em></h1>
+            <h1 data-split>El oficio se<br />convierte en<br /><em>industria.</em></h1>
             <p class="hero-intro">Capacitación práctica para producir con calidad, liderar una maquila y construir negocios de moda con criterio industrial.</p>
             <div class="hero-actions">
               <a class="button button-primary" href="#programas">Explorar programas <span>↘</span></a>
@@ -45,14 +52,22 @@
           <div class="hero-visual" aria-label="Formación especializada en producción textil">
             <div class="visual-orbit orbit-a"></div>
             <div class="visual-orbit orbit-b"></div>
-            <figure class="hero-card hero-card-main" data-parallax="1.15">
-              <img src="assets/supervision-maquilas.webp" alt="Supervisión y control en una planta de confección" width="960" height="960" />
+            <figure class="hero-card hero-card-main" data-parallax="1.15" data-hero-stage>
+              <img class="hero-slide is-active" src="assets/supervision-maquilas.webp" alt="Supervisión y control en una planta de confección" width="960" height="960" data-slide="0" />
+              <img class="hero-slide" src="assets/control-calidad.webp" alt="Control de calidad dentro de una planta de confección" width="960" height="960" data-slide="1" />
+              <img class="hero-slide" src="assets/planeacion-produccion.webp" alt="Planeación de la producción textil" width="960" height="960" data-slide="2" />
             </figure>
             <figure class="hero-card hero-card-secondary" data-parallax="-0.7">
               <img src="assets/reduccion-mermas.webp" alt="Especialista optimizando el corte de tela" width="960" height="960" />
             </figure>
             <div class="hero-metric metric-top" data-parallax="0.45"><strong>05</strong><span>líneas de<br />especialización</span></div>
             <div class="hero-metric metric-bottom" data-parallax="-0.4"><span>Corredor textil</span><strong>Tehuacán · Puebla · Tlaxcala</strong></div>
+            <div class="hero-stage-nav" aria-label="Cambiar imagen principal">
+              <button type="button" class="is-active" data-hero-control="0" aria-label="Supervisión"></button>
+              <button type="button" data-hero-control="1" aria-label="Calidad"></button>
+              <button type="button" data-hero-control="2" aria-label="Planeación"></button>
+              <span><b data-hero-current>01</b> / 03</span>
+            </div>
           </div>
         </div>
         <div class="hero-foot">
@@ -69,6 +84,11 @@
             <p>Nuestra formación parte del piso de producción y llega hasta la estrategia de marca. Sin teoría decorativa. Con herramientas que se usan al día siguiente.</p>
             <div class="signature-line"><span>Práctica</span><span>Certificación</span><span>Aplicación real</span></div>
           </div>
+        </div>
+        <div class="impact-rail reveal" aria-label="Cifras de los programas HILONOVA">
+          <div><strong data-count="6">00</strong><span>programas técnicos</span></div>
+          <div><strong data-count="5">00</strong><span>módulos por programa</span></div>
+          <div><strong data-count="100" data-suffix="%">000</strong><span>enfoque operativo</span></div>
         </div>
       </section>
 
@@ -136,32 +156,53 @@
           </div>
         </div>
         <div class="course-track" data-course-track tabindex="0" aria-label="Cursos destacados, desliza horizontalmente">
-          <article class="course-card">
+          <article class="course-card" data-course="supervisor" tabindex="0" role="button" aria-label="Abrir programa Supervisor de producción">
             <img src="assets/supervisor-produccion.webp" alt="Curso Supervisor de producción en confección" width="960" height="960" loading="lazy" />
-            <div class="course-meta"><span>Operaciones</span><strong>01</strong></div>
+            <div class="course-meta"><span>Operaciones</span><strong>01</strong></div><span class="course-action">Ver programa ↗</span>
           </article>
-          <article class="course-card">
+          <article class="course-card" data-course="quality" tabindex="0" role="button" aria-label="Abrir programa Control de calidad">
             <img src="assets/control-calidad.webp" alt="Curso Control de calidad en confección" width="960" height="960" loading="lazy" />
-            <div class="course-meta"><span>Calidad</span><strong>02</strong></div>
+            <div class="course-meta"><span>Calidad</span><strong>02</strong></div><span class="course-action">Ver programa ↗</span>
           </article>
-          <article class="course-card">
+          <article class="course-card" data-course="costing" tabindex="0" role="button" aria-label="Abrir programa Costeo real">
             <img src="assets/costeo-real.webp" alt="Curso Costeo real de prendas para maquila" width="960" height="960" loading="lazy" />
-            <div class="course-meta"><span>Rentabilidad</span><strong>03</strong></div>
+            <div class="course-meta"><span>Rentabilidad</span><strong>03</strong></div><span class="course-action">Ver programa ↗</span>
           </article>
-          <article class="course-card">
+          <article class="course-card" data-course="planning" tabindex="0" role="button" aria-label="Abrir programa Planeación de producción">
             <img src="assets/planeacion-produccion.webp" alt="Curso Planeación y programación de producción" width="960" height="960" loading="lazy" />
-            <div class="course-meta"><span>Planeación</span><strong>04</strong></div>
+            <div class="course-meta"><span>Planeación</span><strong>04</strong></div><span class="course-action">Ver programa ↗</span>
           </article>
-          <article class="course-card">
+          <article class="course-card" data-course="waste" tabindex="0" role="button" aria-label="Abrir programa Reducción de mermas">
             <img src="assets/reduccion-mermas.webp" alt="Curso Reducción de mermas en corte y confección" width="960" height="960" loading="lazy" />
-            <div class="course-meta"><span>Eficiencia</span><strong>05</strong></div>
+            <div class="course-meta"><span>Eficiencia</span><strong>05</strong></div><span class="course-action">Ver programa ↗</span>
           </article>
-          <article class="course-card">
+          <article class="course-card" data-course="maquila" tabindex="0" role="button" aria-label="Abrir programa Supervisión y control de maquilas">
             <img src="assets/supervision-maquilas.webp" alt="Curso Supervisión y control de maquilas de confección" width="960" height="960" loading="lazy" />
-            <div class="course-meta"><span>Maquila</span><strong>06</strong></div>
+            <div class="course-meta"><span>Maquila</span><strong>06</strong></div><span class="course-action">Ver programa ↗</span>
           </article>
         </div>
       </section>
+
+      <div class="course-dialog" data-course-dialog aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="course-dialog-title">
+        <button class="dialog-backdrop" type="button" data-dialog-close aria-label="Cerrar programa"></button>
+        <section class="dialog-panel">
+          <div class="dialog-head">
+            <span data-dialog-index>01 / PROGRAMA</span>
+            <button type="button" data-dialog-close aria-label="Cerrar programa"><i></i><i></i></button>
+          </div>
+          <div class="dialog-layout">
+            <div class="dialog-visual"><img data-dialog-image src="assets/supervisor-produccion.webp" alt="" /></div>
+            <div class="dialog-content">
+              <p data-dialog-category>Operaciones</p>
+              <h2 id="course-dialog-title" data-dialog-title>Supervisor de producción en confección</h2>
+              <p class="dialog-objective" data-dialog-objective></p>
+              <div class="dialog-audience"><span>DIRIGIDO A</span><p data-dialog-audience></p></div>
+              <ol class="dialog-modules" data-dialog-modules></ol>
+              <a class="button button-dialog" data-dialog-pdf href="#" target="_blank" rel="noopener">Descargar temario <span>↓</span></a>
+            </div>
+          </div>
+        </section>
+      </div>
 
       <section class="enterprise" id="empresas">
         <div class="enterprise-image reveal">
