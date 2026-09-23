@@ -4,41 +4,6 @@ const nav = document.querySelector(".main-nav");
 const progress = document.querySelector(".scroll-progress");
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-const loader = document.querySelector(".page-loader");
-const loaderCount = document.querySelector("[data-loader-count]");
-const loaderLine = document.querySelector(".loader-line i");
-let loadValue = 0;
-const loaderTimer = window.setInterval(() => {
-  loadValue = Math.min(100, loadValue + Math.ceil(Math.random() * 16));
-  if (loaderCount) loaderCount.textContent = String(loadValue).padStart(2, "0");
-  if (loaderLine) loaderLine.style.width = `${loadValue}%`;
-  if (loadValue >= 100) {
-    window.clearInterval(loaderTimer);
-    window.setTimeout(() => loader?.classList.add("is-done"), 120);
-  }
-}, 55);
-
-if (!reducedMotion && window.matchMedia("(pointer: fine)").matches) {
-  const dot = document.querySelector(".cursor-dot");
-  const ring = document.querySelector(".cursor-ring");
-  let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
-  window.addEventListener("pointermove", (event) => {
-    mouseX = event.clientX; mouseY = event.clientY;
-    dot.style.opacity = "1"; ring.style.opacity = "1";
-    dot.style.transform = `translate(${mouseX - 2.5}px, ${mouseY - 2.5}px)`;
-  });
-  const followCursor = () => {
-    ringX += (mouseX - ringX) * .14; ringY += (mouseY - ringY) * .14;
-    ring.style.transform = `translate(${ringX - ring.offsetWidth / 2}px, ${ringY - ring.offsetHeight / 2}px)`;
-    requestAnimationFrame(followCursor);
-  };
-  followCursor();
-  document.querySelectorAll(".course-card").forEach((card) => {
-    card.addEventListener("pointerenter", () => ring.classList.add("is-view"));
-    card.addEventListener("pointerleave", () => ring.classList.remove("is-view"));
-  });
-}
-
 const onScroll = () => {
   const top = window.scrollY;
   const max = document.documentElement.scrollHeight - window.innerHeight;
@@ -85,26 +50,6 @@ const counterObserver = new IntersectionObserver((entries) => {
   });
 }, { threshold: .7 });
 document.querySelectorAll("[data-count]").forEach((counter) => counterObserver.observe(counter));
-
-const heroSlides = [...document.querySelectorAll(".hero-slide")];
-const heroControls = [...document.querySelectorAll("[data-hero-control]")];
-const heroCurrent = document.querySelector("[data-hero-current]");
-let activeHeroSlide = 0;
-let heroSlideTimer;
-const setHeroSlide = (index) => {
-  activeHeroSlide = index;
-  heroSlides.forEach((slide, slideIndex) => slide.classList.toggle("is-active", slideIndex === index));
-  heroControls.forEach((control, controlIndex) => control.classList.toggle("is-active", controlIndex === index));
-  if (heroCurrent) heroCurrent.textContent = String(index + 1).padStart(2, "0");
-};
-const startHeroSlider = () => {
-  window.clearInterval(heroSlideTimer);
-  if (!reducedMotion) heroSlideTimer = window.setInterval(() => setHeroSlide((activeHeroSlide + 1) % heroSlides.length), 4200);
-};
-heroControls.forEach((control) => control.addEventListener("click", () => {
-  setHeroSlide(Number(control.dataset.heroControl)); startHeroSlider();
-}));
-startHeroSlider();
 
 const pathwayData = {
   operations: {
@@ -233,58 +178,5 @@ document.querySelectorAll(".course-card[data-course]").forEach((card) => {
 });
 document.querySelectorAll("[data-dialog-close]").forEach((button) => button.addEventListener("click", closeCourse));
 document.addEventListener("keydown", (event) => { if (event.key === "Escape" && courseDialog?.getAttribute("aria-hidden") === "false") closeCourse(); });
-
-if (!reducedMotion) {
-  const visual = document.querySelector(".hero-visual");
-  visual?.addEventListener("pointermove", (event) => {
-    const rect = visual.getBoundingClientRect();
-    const x = (event.clientX - rect.left) / rect.width - .5;
-    const y = (event.clientY - rect.top) / rect.height - .5;
-    visual.querySelectorAll("[data-parallax]").forEach((item) => {
-      const depth = Number(item.dataset.parallax);
-      item.style.translate = `${x * 20 * depth}px ${y * 20 * depth}px`;
-    });
-  });
-  visual?.addEventListener("pointerleave", () => visual.querySelectorAll("[data-parallax]").forEach((item) => { item.style.translate = "0 0"; }));
-
-  const tilt = document.querySelector("[data-tilt]");
-  tilt?.addEventListener("pointermove", (event) => {
-    const rect = tilt.getBoundingClientRect();
-    const x = (event.clientX - rect.left) / rect.width - .5;
-    const y = (event.clientY - rect.top) / rect.height - .5;
-    tilt.style.transform = `perspective(900px) rotateY(${x * 10}deg) rotateX(${y * -10}deg)`;
-  });
-  tilt?.addEventListener("pointerleave", () => { tilt.style.transform = ""; });
-}
-
-const canvas = document.querySelector(".thread-canvas");
-const context = canvas?.getContext("2d");
-if (canvas && context && !reducedMotion) {
-  let width = 0, height = 0, frame = 0;
-  const resize = () => {
-    const ratio = Math.min(window.devicePixelRatio || 1, 2);
-    width = canvas.clientWidth; height = canvas.clientHeight;
-    canvas.width = width * ratio; canvas.height = height * ratio;
-    context.setTransform(ratio, 0, 0, ratio, 0, 0);
-  };
-  const draw = () => {
-    context.clearRect(0, 0, width, height);
-    for (let line = 0; line < 7; line += 1) {
-      context.beginPath();
-      const base = height * (.16 + line * .115);
-      for (let x = 0; x <= width; x += 24) {
-        const y = base + Math.sin(x * .006 + frame * .009 + line) * (16 + line * 2);
-        if (x === 0) context.moveTo(x, y); else context.lineTo(x, y);
-      }
-      context.strokeStyle = line % 2 ? "rgba(108,229,232,.09)" : "rgba(25,86,232,.12)";
-      context.lineWidth = 1;
-      context.stroke();
-    }
-    frame += 1;
-    requestAnimationFrame(draw);
-  };
-  window.addEventListener("resize", resize);
-  resize(); draw();
-}
 
 document.querySelector("[data-year]").textContent = new Date().getFullYear();
