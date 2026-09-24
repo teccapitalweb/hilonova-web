@@ -105,28 +105,28 @@ document.querySelector("[data-slider-next]")?.addEventListener("click", () => sc
 const courses = {
   supervisor: {
     index: "01", category: "Operaciones", title: "Supervisor de producción en confección",
-    image: "assets/supervisor-produccion.webp", pdf: "assets/programas/supervisor-produccion.pdf",
+    image: "assets/course-supervisor.png", pdf: "assets/programas/supervisor-produccion.pdf",
     objective: "Desarrollar competencias para coordinar líneas de confección, administrar personal, cumplir programas de producción y controlar indicadores de productividad y calidad.",
     audience: "Supervisores, líderes de línea, jefes de producción, ingenieros industriales y textiles, técnicos de manufactura y personal que busca ascender.",
     modules: ["Funciones del supervisor", "Control de producción", "Indicadores KPI", "Manejo operativo del personal", "Mejora continua"],
   },
   quality: {
     index: "02", category: "Calidad", title: "Control de calidad en confección",
-    image: "assets/control-calidad.webp", pdf: "assets/programas/control-calidad-confeccion.pdf",
+    image: "assets/course-control-calidad.png", pdf: "assets/programas/control-calidad-confeccion.pdf",
     objective: "Implementa controles durante la confección y detecta oportunamente defectos que generan reprocesos, devoluciones o pérdidas económicas.",
     audience: "Inspectores de calidad, supervisores de producción, responsables de maquila, ingenieros textiles, diseñadores y propietarios de talleres.",
     modules: ["Fundamentos del control de calidad", "Defectos de confección", "Inspección durante el proceso", "Introducción al sistema AQL", "Inspección final y liberación"],
   },
   costing: {
     index: "03", category: "Rentabilidad", title: "Costeo real de prendas para maquila",
-    image: "assets/costeo-real.webp", pdf: "assets/programas/costeo-real-prendas.pdf",
+    image: "assets/course-costeo.png", pdf: "assets/programas/costeo-real-prendas.pdf",
     objective: "Calcula de manera estructurada el costo real de fabricación considerando materiales, mano de obra, tiempos, procesos externos, desperdicios y gastos asociados.",
     audience: "Propietarios de talleres y marcas, encargados de costos, diseñadores, ingenieros textiles, compradores, emprendedores y responsables de producción.",
     modules: ["Estructura del costo de una prenda", "Costeo de telas y materiales", "Costeo de confección", "Costos adicionales", "Integración del precio"],
   },
   planning: {
     index: "04", category: "Planeación", title: "Planeación y programación de producción",
-    image: "assets/planeacion-produccion.webp", pdf: "assets/programas/planeacion-produccion.pdf",
+    image: "assets/course-planeacion.png", pdf: "assets/programas/planeacion-produccion.pdf",
     objective: "Organiza órdenes, recursos, materiales y capacidades para cumplir fechas de entrega y aprovechar mejor los recursos disponibles.",
     audience: "Planeadores de producción, jefes de taller, supervisores, ingenieros, responsables de maquila, emprendedores y propietarios de fábricas de ropa.",
     modules: ["Fundamentos de planeación", "Cálculo de capacidad", "Programación de órdenes", "Seguimiento de producción", "Tablero de control"],

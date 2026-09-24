@@ -29,9 +29,9 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -.035em; line-height: 1.02; }
 
 .scroll-progress { position: fixed; inset: 0 auto auto 0; z-index: 500; width: 0; height: 2px; background: var(--blue); }
 .site-header { position: fixed; inset: 0 0 auto; z-index: 100; height: 84px; padding: 0 var(--pad); display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; border-bottom: 1px solid transparent; transition: height .25s, background .25s, border-color .25s; }
-.site-header.scrolled { height: 68px; background: rgba(244,243,239,.96); border-color: var(--line); backdrop-filter: blur(14px); }
+.site-header.scrolled { height: 68px; background: rgba(244,243,239,.98); border-color: var(--line); }
 .brand { display: inline-flex; align-items: center; gap: .7rem; justify-self: start; }
-.brand-mark { width: 34px; height: 34px; display: grid; place-items: center; border: 1px solid var(--ink); border-radius: 50%; font-size: .68rem; font-weight: 700; }
+.brand-logo { width: 38px; height: 34px; object-fit: contain; }
 .brand-name { font-size: .9rem; font-weight: 700; letter-spacing: .15em; }
 .main-nav { display: flex; align-items: center; gap: clamp(1.4rem, 2.5vw, 2.8rem); font-size: .88rem; }
 .main-nav a { color: var(--ink-soft); border-bottom: 1px solid transparent; }
@@ -113,8 +113,8 @@ main > section { padding: clamp(5rem, 9vw, 9rem) var(--pad); }
 .slider-controls button { width: 48px; height: 48px; border: 1px solid var(--ink); background: transparent; cursor: pointer; }
 .slider-controls button:hover { color: var(--white); background: var(--ink); }
 .course-track { margin-top: 3.2rem; padding-bottom: 1rem; display: flex; gap: 1.2rem; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: thin; scrollbar-color: var(--line) transparent; }
-.course-card { position: relative; flex: 0 0 clamp(270px, 27vw, 410px); scroll-snap-align: start; cursor: pointer; }
-.course-card img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; filter: saturate(.72); transition: filter .25s; }
+.course-card { position: relative; flex: 0 0 clamp(220px, 20vw, 285px); scroll-snap-align: start; cursor: pointer; }
+.course-card img { width: 100%; height: auto; object-fit: contain; filter: saturate(.88); transition: filter .25s; }
 .course-card:hover img { filter: saturate(1); }
 .course-card:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
 .course-meta { padding: .85rem 0 .3rem; display: flex; justify-content: space-between; border-bottom: 1px solid var(--line); color: var(--muted); font-size: .78rem; text-transform: uppercase; letter-spacing: .06em; }
@@ -133,8 +133,8 @@ main > section { padding: clamp(5rem, 9vw, 9rem) var(--pad); }
 .dialog-head button i { position: absolute; left: 10px; top: 19px; width: 18px; height: 1px; background: var(--ink); transform: rotate(45deg); }
 .dialog-head button i:last-child { transform: rotate(-45deg); }
 .dialog-layout { display: grid; grid-template-columns: .7fr 1fr; min-height: calc(100svh - 68px); }
-.dialog-visual { position: sticky; top: 68px; height: calc(100svh - 68px); overflow: hidden; }
-.dialog-visual img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.7); }
+.dialog-visual { position: sticky; top: 68px; height: calc(100svh - 68px); overflow: hidden; background: #071d30; }
+.dialog-visual img { width: 100%; height: 100%; object-fit: contain; filter: saturate(.9); }
 .dialog-content { padding: clamp(2.5rem, 5vw, 5.5rem); }
 .dialog-content > p:first-child { margin-bottom: .8rem; color: var(--blue); font-size: .76rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
 .dialog-content h2 { font-size: clamp(2.6rem, 4.6vw, 5.1rem); }
@@ -180,7 +180,7 @@ main > section { padding: clamp(5rem, 9vw, 9rem) var(--pad); }
 
 footer { padding: 3rem var(--pad); display: grid; grid-template-columns: 1fr 1fr auto; gap: 2rem; align-items: start; color: rgba(255,255,255,.7); background: var(--ink); font-size: .82rem; }
 .footer-brand { display: flex; align-items: center; gap: .8rem; color: var(--white); letter-spacing: .12em; }
-.footer-logo { width: 34px; height: 34px; border-radius: 50%; }
+.footer-logo { width: 142px; height: auto; padding: .45rem; background: var(--white); }
 .footer-links { display: flex; gap: 1.5rem; }
 footer small { grid-column: 1 / -1; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,.18); }
 
@@ -192,9 +192,9 @@ footer small { grid-column: 1 / -1; padding-top: 1.5rem; border-top: 1px solid r
   .brand, .menu-toggle { position: relative; z-index: 2; }
   .menu-toggle { display: block; justify-self: end; }
   .header-cta { display: none; }
-  .main-nav { position: fixed; inset: 0; z-index: 1; padding: 7rem var(--pad) 3rem; flex-direction: column; align-items: flex-start; justify-content: center; gap: 1.2rem; background: var(--paper); transform: translateY(-100%); transition: transform .35s ease; }
+  .main-nav { position: fixed; inset: 0; z-index: 1; padding: 7rem var(--pad) 3rem; flex-direction: column; align-items: flex-start; justify-content: center; gap: 1.2rem; background: var(--paper); transform: translateY(-100%); visibility: hidden; pointer-events: none; transition: transform .35s ease, visibility 0s linear .35s; }
   .main-nav a { font-size: clamp(2rem, 7vw, 4rem); font-weight: 600; letter-spacing: -.03em; }
-  .menu-open .main-nav { transform: none; }
+  .menu-open .main-nav { transform: none; visibility: visible; pointer-events: auto; transition-delay: 0s; }
   .hero-grid { grid-template-columns: 1fr; }
   .hero-copy { max-width: 850px; }
   .hero-card { aspect-ratio: 2 / 1; }
@@ -226,7 +226,7 @@ footer small { grid-column: 1 / -1; padding-top: 1.5rem; border-top: 1px solid r
   .program-row p { grid-column: 2; }
   .showcase-head { align-items: start; }
   .slider-controls { display: none; }
-  .course-card { flex-basis: 80vw; }
+  .course-card { flex-basis: 70vw; }
   .dialog-panel { width: 100%; }
   .dialog-layout { grid-template-columns: 1fr; }
   .dialog-visual { position: relative; top: auto; height: 48vh; }
