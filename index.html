@@ -176,7 +176,18 @@
               <p class="dialog-objective" data-dialog-objective></p>
               <div class="dialog-audience"><span>DIRIGIDO A</span><p data-dialog-audience></p></div>
               <ol class="dialog-modules" data-dialog-modules></ol>
-              <a class="button button-dialog" data-dialog-pdf href="#" target="_blank" rel="noopener">Descargar temario <span>↓</span></a>
+              <div class="dialog-actions">
+                <button class="button button-dialog" type="button" data-dialog-pdf-toggle aria-expanded="false" aria-controls="dialog-pdf-viewer">Ver temario completo <span>↓</span></button>
+                <a class="dialog-download" data-dialog-pdf href="#" download>Descargar PDF <span>↓</span></a>
+              </div>
+              <section class="dialog-pdf-viewer" id="dialog-pdf-viewer" data-dialog-pdf-viewer hidden aria-label="Temario completo del curso">
+                <div class="dialog-pdf-head">
+                  <div><span>DOCUMENTO</span><strong>Temario completo</strong></div>
+                  <a data-dialog-pdf-open href="#" target="_blank" rel="noopener">Abrir en otra pestaña ↗</a>
+                </div>
+                <iframe data-dialog-pdf-frame title="Temario completo del curso" loading="lazy"></iframe>
+                <p>Si el visor no aparece en tu dispositivo, <a data-dialog-pdf-fallback href="#" target="_blank" rel="noopener">abre el PDF aquí</a>.</p>
+              </section>
             </div>
           </div>
         </section>

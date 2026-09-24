@@ -176,7 +176,21 @@ const courses = {
 };
 
 const courseDialog = document.querySelector("[data-course-dialog]");
+const pdfToggle = courseDialog?.querySelector("[data-dialog-pdf-toggle]");
+const pdfViewer = courseDialog?.querySelector("[data-dialog-pdf-viewer]");
+const pdfFrame = courseDialog?.querySelector("[data-dialog-pdf-frame]");
 let lastFocusedCourse = null;
+let activeCoursePdf = "";
+const setPdfViewer = (open) => {
+  if (!pdfToggle || !pdfViewer || !pdfFrame) return;
+  pdfToggle.setAttribute("aria-expanded", String(open));
+  pdfToggle.firstChild.textContent = open ? "Ocultar temario " : "Ver temario completo ";
+  pdfViewer.hidden = !open;
+  if (open && activeCoursePdf && !pdfFrame.getAttribute("src")) {
+    pdfFrame.src = `${activeCoursePdf}#view=FitH&toolbar=1&navpanes=0`;
+  }
+  if (!open) pdfFrame.removeAttribute("src");
+};
 const openCourse = (courseKey, trigger) => {
   const course = courses[courseKey];
   if (!course || !courseDialog) return;
@@ -189,15 +203,22 @@ const openCourse = (courseKey, trigger) => {
   const image = courseDialog.querySelector("[data-dialog-image]"); image.src = course.image; image.alt = course.title;
   courseDialog.querySelector("[data-dialog-modules]").innerHTML = course.modules.map((module) => `<li>${module}</li>`).join("");
   courseDialog.querySelector("[data-dialog-pdf]").href = course.pdf;
+  courseDialog.querySelector("[data-dialog-pdf-open]").href = course.pdf;
+  courseDialog.querySelector("[data-dialog-pdf-fallback]").href = course.pdf;
+  pdfFrame.title = `Temario completo: ${course.title}`;
+  activeCoursePdf = course.pdf;
+  setPdfViewer(false);
   courseDialog.setAttribute("aria-hidden", "false");
   document.body.classList.add("dialog-open");
   courseDialog.querySelector("[data-dialog-close]").focus();
 };
 const closeCourse = () => {
+  setPdfViewer(false);
   courseDialog?.setAttribute("aria-hidden", "true");
   document.body.classList.remove("dialog-open");
   lastFocusedCourse?.focus();
 };
+pdfToggle?.addEventListener("click", () => setPdfViewer(pdfToggle.getAttribute("aria-expanded") !== "true"));
 document.querySelectorAll(".course-card[data-course]").forEach((card) => {
   card.addEventListener("click", () => openCourse(card.dataset.course, card));
   card.addEventListener("keydown", (event) => {

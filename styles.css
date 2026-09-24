@@ -150,7 +150,20 @@ main > section { padding: clamp(5rem, 9vw, 9rem) var(--pad); }
 .dialog-modules { margin: 2rem 0; padding: 0; list-style: none; counter-reset: module; }
 .dialog-modules li { counter-increment: module; display: grid; grid-template-columns: 2.4rem 1fr; gap: .7rem; padding: .9rem 0; border-bottom: 1px solid var(--line); }
 .dialog-modules li::before { content: "0" counter(module); color: var(--blue); font-size: .72rem; font-weight: 700; }
+.dialog-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.4rem; }
 .button-dialog { background: var(--white); }
+.button-dialog span { display: inline-block; transition: transform .25s ease; }
+.button-dialog[aria-expanded="true"] span { transform: rotate(180deg); }
+.dialog-download { color: var(--ink); font-size: .78rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; text-decoration: none; border-bottom: 1px solid var(--ink); }
+.dialog-pdf-viewer { margin-top: 1.6rem; border: 1px solid var(--line); background: #e8e7e3; }
+.dialog-pdf-viewer[hidden] { display: none; }
+.dialog-pdf-head { min-height: 68px; padding: 1rem 1.2rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; border-bottom: 1px solid var(--line); background: var(--white); }
+.dialog-pdf-head div { display: grid; gap: .15rem; }
+.dialog-pdf-head span { color: var(--blue); font-size: .68rem; font-weight: 700; letter-spacing: .09em; }
+.dialog-pdf-head strong { font-size: 1rem; font-weight: 600; }
+.dialog-pdf-head a, .dialog-pdf-viewer > p a { color: var(--ink); font-size: .75rem; font-weight: 600; }
+.dialog-pdf-viewer iframe { display: block; width: 100%; height: min(72vh, 760px); border: 0; background: #353535; }
+.dialog-pdf-viewer > p { display: none; margin: 0; padding: .9rem 1.2rem; color: var(--muted); font-size: .86rem; background: var(--white); }
 
 .enterprise { padding: clamp(5rem, 9vw, 9rem) var(--pad); display: block; color: var(--white); background: var(--ink); }
 .enterprise-image { display: none; }
@@ -237,6 +250,12 @@ footer small { grid-column: 1 / -1; padding-top: 1.5rem; border-top: 1px solid r
   .dialog-visual { position: relative; top: auto; height: 48vh; }
   .dialog-content h2 { font-size: clamp(2.4rem, 12vw, 4rem); }
   .dialog-audience { grid-template-columns: 1fr; }
+  .dialog-actions { align-items: stretch; flex-direction: column; }
+  .dialog-actions .button { width: 100%; }
+  .dialog-download { width: max-content; }
+  .dialog-pdf-head { align-items: flex-start; flex-direction: column; }
+  .dialog-pdf-viewer iframe { height: 62vh; }
+  .dialog-pdf-viewer > p { display: block; }
   .certification { grid-template-columns: 1fr; }
   .cert-details { grid-column: auto; }
   footer { grid-template-columns: 1fr; }
