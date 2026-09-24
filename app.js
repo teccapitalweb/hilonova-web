@@ -98,9 +98,37 @@ document.querySelectorAll("[data-path]").forEach((tab) => {
 });
 
 const track = document.querySelector("[data-course-track]");
-const scrollCourses = (direction) => track?.scrollBy({ left: direction * Math.min(track.clientWidth * .82, 520), behavior: "smooth" });
+const courseCards = [...document.querySelectorAll(".course-card")];
+const sliderCurrent = document.querySelector("[data-slider-current]");
+const scrollCourses = (direction) => {
+  if (!track || !courseCards.length) return;
+  const gap = Number.parseFloat(window.getComputedStyle(track).columnGap) || 0;
+  track.scrollBy({ left: direction * (courseCards[0].offsetWidth + gap), behavior: "smooth" });
+};
 document.querySelector("[data-slider-prev]")?.addEventListener("click", () => scrollCourses(-1));
 document.querySelector("[data-slider-next]")?.addEventListener("click", () => scrollCourses(1));
+
+let sliderFrame;
+const updateCourseSlider = () => {
+  if (!track || !courseCards.length) return;
+  const trackRect = track.getBoundingClientRect();
+  const focusPoint = trackRect.left + Math.min(trackRect.width * .2, 180);
+  let activeIndex = 0;
+  let shortestDistance = Number.POSITIVE_INFINITY;
+  courseCards.forEach((card, index) => {
+    const rect = card.getBoundingClientRect();
+    const distance = Math.abs(rect.left + rect.width / 2 - focusPoint);
+    if (distance < shortestDistance) { shortestDistance = distance; activeIndex = index; }
+  });
+  courseCards.forEach((card, index) => card.classList.toggle("is-active", index === activeIndex));
+  if (sliderCurrent) sliderCurrent.textContent = String(activeIndex + 1).padStart(2, "0");
+};
+track?.addEventListener("scroll", () => {
+  window.cancelAnimationFrame(sliderFrame);
+  sliderFrame = window.requestAnimationFrame(updateCourseSlider);
+}, { passive: true });
+window.addEventListener("resize", updateCourseSlider);
+updateCourseSlider();
 
 const courses = {
   supervisor: {
