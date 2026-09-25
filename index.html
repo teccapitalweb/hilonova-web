@@ -3,8 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
     <meta name="description" content="HILONOVA profesionaliza la confección, la producción en maquila, la mezclilla y el negocio de moda con capacitación práctica y certificada." />
     <meta name="theme-color" content="#f4f3ef" />
+    <link rel="canonical" href="https://hilonovamx.com/" />
+    <script>
+      if (location.protocol === "http:" && !["localhost", "127.0.0.1"].includes(location.hostname)) {
+        location.replace(`https://${location.host}${location.pathname}${location.search}${location.hash}`);
+      }
+    </script>
     <title>HILONOVA | Formación para la industria textil</title>
     <link rel="icon" type="image/png" href="assets/hilonova-mark.png" />
     <link rel="stylesheet" href="styles.css" />
